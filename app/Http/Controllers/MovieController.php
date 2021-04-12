@@ -25,7 +25,19 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // echo "hello from store";
+        // print_r( $request->all() );
+        // dd( $request->all() );
+
+        $movie = new Movie();
+        $movie->name = $request->input('name');
+        $movie->description = $request->input('description');
+        $movie->year = $request->input('year');
+        $movie->genre = $request->input('genre');
+        $movie->duration = $request->input('duration');
+        $movie->save();
+
+        return $movie;
     }
 
     /**
@@ -37,7 +49,7 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        //
+        echo "hello from update";
     }
 
     /**
@@ -48,6 +60,6 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        echo "hello from destroy";
     }
 }
