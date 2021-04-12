@@ -12,7 +12,7 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() // GET
     {
         // echo "HOLA";
         $movies = Movie::get();
@@ -27,7 +27,7 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) // POST
     {
         // echo "hello from store";
         // print_r( $request->all() );
@@ -40,7 +40,7 @@ class MovieController extends Controller
         $movie->genre = $request->input('genre');
         $movie->duration = $request->input('duration');
         $movie->save();
-
+        // echo \json_encode($movie);
         return $movie;
     }
 
@@ -48,22 +48,36 @@ class MovieController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Movie  $movie
+     * @param  $movie_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
+    public function update(Request $request, $movie_id) // PUT
     {
-        echo "hello from update";
+        // echo "hello from update";
+        $movie = Movie::find($movie_id);
+        $movie->name = $request->input('name');
+        $movie->description = $request->input('description');
+        $movie->year = $request->input('year');
+        $movie->genre = $request->input('genre');
+        $movie->duration = $request->input('duration');
+        $movie->save();
+        // echo \json_encode($movie);
+        return $movie;
     }
+    
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Movie  $movie
+     * @param  $movie_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy($movie_id)  // DELETE
     {
-        echo "hello from destroy";
+        // echo "hello from destroy";
+        $movie = Movie::find($movie_id);
+        $movie->delete();
+        // echo \json_encode($movie);
+        return $movie;
     }
 }
