@@ -14,7 +14,11 @@ class MovieController extends Controller
      */
     public function index()
     {
-        echo "HOLA";
+        // echo "HOLA";
+        $movies = Movie::get();
+        return $movies;
+        // dd( $movies );
+        // echo \json_encode($movies);
     }
 
     /**
